@@ -2101,13 +2101,6 @@ def apply_screen_text_overrides(
                     target["label"] = theme["label"]
                 if "placeholder" in theme:
                     target["placeholder"] = theme["placeholder"]
-        for yaml_key, json_key in (
-            ("level1_section_title", "level1SectionTitle"),
-            ("level2_section_title", "level2SectionTitle"),
-            ("filter_by_title", "filterByTitle"),
-        ):
-            if yaml_key in downloads_yaml:
-                downloads[json_key] = downloads_yaml[yaml_key]
 
 
 def ask_screen_text_fields(screens: dict[str, Any]) -> None:
@@ -2145,7 +2138,7 @@ def ask_screen_text_fields(screens: dict[str, Any]) -> None:
         )
 
     print("\n  --- Downloads screen labels ---")
-    print("  Text shown on filters and section headers in the downloads screen.")
+    print("  Text shown on filters in the downloads screen.")
     downloads = screens.setdefault("downloads", {})
     theme = downloads.setdefault("theme", {})
     theme["label"] = ask_field(
@@ -2156,26 +2149,6 @@ def ask_screen_text_fields(screens: dict[str, Any]) -> None:
     theme["placeholder"] = ask_field(
         "Downloads theme placeholder", theme.get("placeholder", "All themes"),
         "Placeholder for the theme filter on the downloads screen.",
-        "the downloads screen",
-    )
-    downloads["level1_section_title"] = ask_field(
-        "Downloads level 1 section title",
-        downloads.get(
-            "level1_section_title",
-            "Select the continent you want to access for Downloads",
-        ),
-        "Introductory text for territorial level 1 on the downloads screen.",
-        "the downloads screen",
-    )
-    downloads["level2_section_title"] = ask_field(
-        "Downloads level 2 section title",
-        downloads.get("level2_section_title", "Options for the selected continent"),
-        "Introductory text for territorial level 2 on the downloads screen.",
-        "the downloads screen",
-    )
-    downloads["filter_by_title"] = ask_field(
-        "Downloads filter-by title", downloads.get("filter_by_title", "Filter by:"),
-        "Prefix shown before download filters.",
         "the downloads screen",
     )
 
